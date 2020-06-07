@@ -1,0 +1,26 @@
+version: "3"
+
+services:
+  redis: 
+    image: redis:4.0.9
+    ports: 
+      - 6379:6379
+    volumes:
+      #сохранение данных в глабальном виде (где-то на просторах Докера)
+      #секция volumes: обязательна в этом случае
+      - redis-data:/data
+      # - ./redis-data:/data    сохранение данных на диске в папке /redis-data
+      # команда запускается с ключом --appendonly yes
+    command: 'redis-server --appendonly yes' 
+  mongo:
+    image: mongo:3.6.3
+    ports:
+      - 27017:27017
+    volumes:
+      - mongo-data:/data/db
+      # command: '????' 
+
+
+volumes:
+  redis-data:
+  mongo-data:
